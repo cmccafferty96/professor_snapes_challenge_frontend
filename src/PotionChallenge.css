@@ -1,0 +1,78 @@
+/* Style for the entire potion challenge container */
+.potion-challenge {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style for the background image container */
+.background-image-container {
+    position: realtive;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Style for the background image */
+.background-image {
+   width: 100%;
+   display: block;
+   opacity: 1;
+}
+
+/* Style for the game container */
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Style for the 5x5 grid of ingredients */
+.inventory {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style for individual ingredient box */
+.ingredient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for ingredient image */
+.ingredient img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style for ingredient name label */
+.ingredient-name {
+    font-size: 14px;
+    font-style: italic;
+    color: black;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Style for Brew Potion button */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for success message */
+.success-message {
+    margin-top: 20px;
+    color: #4caf50;
+    font-weight: bold;
+}
