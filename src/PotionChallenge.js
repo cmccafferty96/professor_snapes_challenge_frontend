@@ -43,36 +43,39 @@ function PotionChallenge() {
     };
 
     const handleBrewPotion = () => {
-        console.log("Potions:", potions);
-        console.log("Current Potion Index:", currentPotion)
+        const currentPotionData = potions[currentPotion];
 
-        const currentPotionIngredients = potions[currentPotion].ingredients;
+        if (currentPotionData) {
+            const currentPotionCorrectIngredients = currentPotionData.correct_ingredients.split(',').map(Number);
 
-        if (
-            selectedIngredients.length === currentPotionIngredients.length &&
-            selectedIngredients.every((id) => currentPotionIngredients.includes(id))
-        ) {
-            const pointsToAdd = 10;
-            const house = "Gryffindor";
-            setHousePoints((prevHousePoints) => ({
-                ...prevHousePoints,
-                [house]: prevHousePoints[house] + pointsToAdd
-            }));
+            if (
+                selectedIngredients.length === currentPotionCorrectIngredients.length &&
+                selectedIngredients.every((id) => currentPotionCorrectIngredients.includes(id))
+            ) {
+                const pointsToAdd = 10;
+                // Calculate the updated points for all Hogwarts houses
+                const house = "";
+                setHousePoints((prevHousePoints) => ({
+                    ...prevHousePoints,
+                    [house]: prevHousePoints[house] + pointsToAdd
+                }));
+                setSuccessMessage("Potion successful!");
+                
+                const nextPotionIndex = currentPotion + 1;
 
-            setSuccessMessage("Potion successful!");
-            // Calculate the next potion index
-            const nextPotionIndex = currentPotion +1;
+                if (nextPotionIndex < potions.length) {
+                    setCurrentPotion(nextPotionIndex);
+                } else {
+                    setSuccessMessage("Congratulations! You've completed all of the potion challenges.");
+                }
 
-            if (nextPotionIndex < potions.length) {
-                setCurrentPotion(nextPotionIndex);
+                setSelectedIngredients([]);
             } else {
-                setSuccessMessage("Congratulations! You've completed all the potion challenges.");
+                setSuccessMessage("Incorrect ingredients. Try again.");
             }
-
-            setSelectedIngredients([]);
         } else {
-            setSuccessMessage("Incorrect ingredients. Try again.");
-        }    
+            console.error("Current potion data not found");
+        }
     };
 
     return (

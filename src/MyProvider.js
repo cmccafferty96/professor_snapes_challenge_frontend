@@ -11,26 +11,26 @@ const MyProvider = ({ children }) => {
         Ravenclaw: 0,
         Slytherin: 0
     });
+    const [currentPotionData, setCurrentPotionData] = useState(null); // Track current potion data
 
     useEffect(() => {
-        fetch("http://localhost:3001/ingredients")
+        fetch("http://localhost:5000/ingredients")
         .then(response => response.json())
         .then(ingredientsData => setIngredients(ingredientsData))
         .catch(error => {
-      
+            console.error("Error fetching ingredients:", error);
         });
       
-        fetch("http://localhost:3002/potions")
+        fetch("http://localhost:5000/potions")
         .then(response => response.json())
         .then(potionsData => {
             setPotions(potionsData);
+            setCurrentPotionData(potionsData[0])
             console.log("Fetched Potions!", potionsData);
         })
         .catch(error => {
             console.error("Error fetching potions:", error);
         });
-
-        
     }, []);
 
     return (

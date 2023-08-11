@@ -58,6 +58,18 @@ function Login() {
         } else {
             // Perform account creation logic here
             setSuccessMessage("Account created successfully!")
+            fetch("http://127.0.0.1:5000/users", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+
+            } )
         }
     };
 

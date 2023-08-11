@@ -16,13 +16,13 @@ function Potions(){
                     <img src={potion.thumbnail} alt={potion.name} style={{ maxWidth: "100px" }} />
                     <ul>
                         <li>Ingredients:</li>
-                        <ul>
+                        {/* <ul>
                             {potion.correct_ingredients.map((ingredientId) => (
                                 <li key={ingredientId}>
                                     {ingredients.find((ingredient) => ingredient.id === ingredientId)?.name}
                                 </li>
                             ))}
-                        </ul>
+                        </ul> */}
                     </ul>
                 </li>
             ))}
