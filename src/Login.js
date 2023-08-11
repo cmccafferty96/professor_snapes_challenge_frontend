@@ -7,6 +7,7 @@ function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [user, setUser] = useState(null);
     
 
     const handleUsernameChange = (event) => {
@@ -33,17 +34,41 @@ function Login() {
 
         if (newUsername.length < 1 || newUsername.length > 25) {
             setErrorMessage("New username must be between 1 and 25 characters.");
-        } else {
-            // Perform username change logic here
-            // For now, just set a success message
+        } else if(user){
+
+            fetch(`http://127.0.0.1:5000/users/${user.id}`, {
+                method: 'PATCH', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: newUsername
+                })
+            })
             setSuccessMessage("Username changed successfully");
+        } 
+        else {
+            setSuccessMessage("ERROR: Unable to change username");
         }
     };
 
     const handleDeleteAccount = () => {
-        // Perform delete account logic here
-        // For now just set a success message
-        setSuccessMessage("Account deleted successfully!")
+        if (user) {
+            fetch(`http://127.0.0.1:5000/users/${user.id}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok){
+                    setSuccessMessage("Account deleted successfully!")
+                } 
+            })
+            
+        }
+        else {
+            setSuccessMessage("ERROR, unable to delete account.")
+        }
+        
     };
 
     const handleCreateAccount = (event) => {
@@ -69,7 +94,10 @@ function Login() {
                     password: password
                 })
 
-            } )
+            })
+            .then(response => response.json())
+            .then(newUser => setUser(newUser))
+
         }
     };
 
